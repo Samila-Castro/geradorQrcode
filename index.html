@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <title>Gerador de QRCode</title>
+    
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{ titulo }}</h1>
+        <div>
+            <input type="text" size="25" placeholder="Digite para gerar..." v-model="text" @input="onData">
+        </div>
+
+        <div v-if="text" class="output">
+            <img :src="newQRCode" alt="QRCode">
+        </div>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                titulo: "Gerador QRCode",
+                text: "https://www.linkedin.com/in/samila-castro-7b63b41a0/",
+                qrcode: new QRious({ size: 300})
+            },
+            computed: {
+                newQRCode() {
+                    this.qrcode.value = this.text;
+                    return this.qrcode.toDataURL();
+                }
+            },
+            
+        })
+    </script>
+</body>
+
+</html>
